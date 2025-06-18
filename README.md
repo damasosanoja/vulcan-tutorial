@@ -2,7 +2,10 @@
 
 **Learn Vulcan's hybrid AI approach through hands-on supply chain risk automation**
 
-[![Open in GitHub Codespaces](https://github.com/codespaces.new/your-org/your you how to build reliable AI-enhanced automation systems using **Vulcan**, a forward-chaining inference engine that combines computational logic with AI intelligence. Through a realistic supply chain risk scenario, you'll learn why traditional LLM+RAG approaches fail in high-stakes automation and how Vulcan's hybrid architecture solves these problems.
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/damasosanoja/vulcan-tutorial)
+
+
+Learn how to build reliable AI-enhanced automation systems using **Vulcan**, a forward-chaining inference engine that combines computational logic with AI intelligence. Through a realistic supply chain risk scenario, you'll learn why traditional LLM+RAG approaches fail in high-stakes automation and how Vulcan's hybrid architecture solves these problems.
 
 ## 🎯 What You'll Learn
 
