@@ -1,0 +1,55 @@
+{
+  "name": "Vulcan Supply Chain Tutorial",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  
+  "secrets": {
+    "GEMINI_API_KEY": {
+      "description": "Your Google Gemini API key for AI-powered tutorial examples. Get yours at: https://aistudio.google.com/app/apikey",
+      "documentationUrl": "https://ai.google.dev/gemini-api/docs/api-key"
+    }
+  },
+  
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "latest"
+    }
+  },
+  
+  "postCreateCommand": "pip install -r requirements.txt",
+  
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.pylint",
+        "ms-python.flake8",
+        "ms-toolsai.jupyter",
+        "charliermarsh.ruff",
+        "ms-python.black-formatter"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.formatting.provider": "black",
+        "python.linting.enabled": true,
+        "python.linting.pylintEnabled": true,
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "files.associations": {
+          "*.txt": "plaintext"
+        }
+      }
+    }
+  },
+  
+  "forwardPorts": [],
+  
+  "remoteUser": "vscode",
+  
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  
+  "onCreateCommand": "echo 'Welcome to the Vulcan Supply Chain Tutorial! 🚀'",
+  
+  "postStartCommand": [
+    "echo 'Tutorial ready! Try: python supply_chain.py --mock events/event-1.txt'",
+    "echo 'For real AI examples, make sure your GEMINI_API_KEY secret is configured.'"
+  ]
+}
