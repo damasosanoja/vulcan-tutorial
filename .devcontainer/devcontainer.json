@@ -1,6 +1,6 @@
 {
   "name": "Vulcan Supply Chain Tutorial",
-  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
   
   "secrets": {
     "GEMINI_API_KEY": {
