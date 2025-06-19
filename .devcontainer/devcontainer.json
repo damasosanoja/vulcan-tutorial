@@ -8,8 +8,7 @@
       "documentationUrl": "https://ai.google.dev/gemini-api/docs/api-key"
     },
     "OPENAI_API_KEY": {
-      "description": "Your OpenAI API key (alternative to Gemini). Get yours at: https://platform.openai.com/api-keys",
-      "documentationUrl": "https://platform.openai.com/docs/quickstart"
+      "description": "Your OpenAI API key (alternative to Gemini)"
     }
   },
   
@@ -19,7 +18,7 @@
     }
   },
   
-  "postCreateCommand": "pip install -r requirements.txt && chmod +x demo && chmod +x demo.py",
+  "postCreateCommand": "chmod +x demo && chmod +x demo.py && (pip install -r requirements.txt || echo 'Dependencies will be installed on first run')",
   
   "customizations": {
     "vscode": {
@@ -45,12 +44,8 @@
   },
   
   "forwardPorts": [],
-  
   "remoteUser": "vscode",
-  
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-  
-  "onCreateCommand": "echo '🚀 Welcome to the Vulcan Supply Chain Tutorial!'",
-  
+  "onCreateCommand": "echo 'Welcome to the Vulcan Supply Chain Tutorial! 🚀'",
   "postStartCommand": "echo '✅ Tutorial ready! Try these commands:' && echo '   ./demo 1                    # Mock simulation (works immediately)' && echo '   ./demo 1 --gemini          # Real Gemini AI (requires API key)' && echo '   ./demo 1 --openai          # Real OpenAI AI (requires API key)' && echo '   ./demo --help              # Full command reference' && echo '' && echo '💡 Start with mock simulation - no setup required!'"
 }

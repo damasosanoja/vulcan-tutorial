@@ -4,16 +4,47 @@ This repository contains the complete hands-on tutorial files for learning Vulca
 
 ## 🚀 Quick Start
 
-**Option 1: GitHub Codespaces (Recommended)**
+### Option 1: GitHub Codespaces (Recommended)
+
+**Step 1: Create Your Own Repository**
+
+Click the **"USE THIS TEMPLATE"** button below to create your own repository:
 
 [![Use this template](https://img.shields.io/badge/Use%20this%20template-2ea44f?style=for-the-badge)](https://github.com/damasosanoja/vulcan-tutorial/generate)
 
-1. Click the **"USE THIS TEMPLATE"** button above to create your own copy
-2. Open **your new repository** in Codespaces
-3. Enter your OpenAI or Gemini API keys (optional but recommended for the full Vulcan experience)
-4. Run: `./demo 1` (works immediately, no API keys required!)
+**Step 2: Launch Codespaces**
 
-**Option 2: Local Development**
+Once your new repository is created, click the **"Open in GitHub Codespaces"** button below:
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces)
+
+This will take you to the Codespaces page where you need to:
+1. **Select your new repository** from the "Repository" dropdown (it should be named something like `your-username/vulcan-tutorial`)
+2. **Choose "main" branch** (usually selected by default)
+3. **Click "Create codespace on main"**
+4. **Wait for setup** (2-3 minutes) - dependencies will install automatically
+
+**Step 3: Configure API Keys (Optional)**
+
+During Codespace creation, you'll be prompted to enter:
+- `OPENAI_API_KEY` (recommended for real AI examples)
+- `GEMINI_API_KEY` (alternative to OpenAI)
+
+**Step 4: Start Learning**
+
+Once your Codespace loads, run:
+
+```
+./demo 1 # Mock simulation (works immediately, no API keys required!)
+```
+
+### Option 2: Create a Fork
+
+1. Fork this repository
+2. Open your fork in Codespaces
+3. Run: `./demo 1`
+
+### Option 3: Local Development
 
 Clone this repository to the desired location and run:
 
