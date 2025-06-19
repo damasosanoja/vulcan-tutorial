@@ -1,0 +1,192 @@
+#!/bin/bash
+# ═══════════════════════════════════════════════════════════════════════════════
+# Vulcan Tutorial Demo Bash Launcher
+# ═══════════════════════════════════════════════════════════════════════════════
+# This bash script provides the simplest possible interface for the Vulcan tutorial.
+# It enables commands like `demo 1 --mock` instead of `python3 demo.py 1 --mock`,
+# making the tutorial incredibly user-friendly, especially in Codespaces where
+# this script is automatically made executable.
+
+# Tutorial progression made simple:
+#   demo 1           # Mock simulation (default, works immediately)
+#   demo 1 --gemini  # Real Gemini AI integration  
+#   demo 1 --openai  # Real OpenAI integration
+#   demo 1 --enhanced # Enhanced rules with fallback logic
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Help Display Function
+# ═══════════════════════════════════════════════════════════════════════════════
+
+show_help() {
+    echo "🚀 Vulcan Supply Chain Tutorial"
+    echo ""
+    echo "Usage: demo <scenario> [options]"
+    echo ""
+    echo "Scenarios:"
+    echo "  1    Tariff Crisis    (HIGH risk → supplier switch)"
+    echo "  2    Normal Operations (LOW risk → no alerts)"  
+    echo "  3    Shipping Delays  (MEDIUM risk → monitoring alerts)"
+    echo "  4    Enhanced Demo    (fallback logic demonstration)"
+    echo ""
+    echo "Options:"
+    echo "  (none)     Mock simulation (default, no API key required)"
+    echo "  --gemini   Use Gemini AI (requires GEMINI_API_KEY)"
+    echo "  --openai   Use OpenAI AI (requires OPENAI_API_KEY)"
+    echo "  --enhanced Add deterministic fallback rules (with --gemini or --openai)"
+    echo "  --help     Show this help message"
+    echo ""
+    echo "Examples:"
+    echo "  demo 1                    # Mock simulation, perfect for learning"
+    echo "  demo 1 --gemini          # Real Gemini AI integration"
+    echo "  demo 1 --openai          # Real OpenAI integration"  
+    echo "  demo 1 --gemini --enhanced # Production patterns with safeguards"
+    echo "  demo --help              # Show this help message"
+    echo ""
+    echo "💡 Start with mock simulation - it works immediately without any setup!"
+    echo ""
+    echo "🎯 Learning Path:"
+    echo "   1. Try mock simulation first (demo 1)"
+    echo "   2. Set up API keys in Codespace secrets"
+    echo "   3. Experiment with real AI (demo 1 --gemini or demo 1 --openai)"
+    echo "   4. Explore enhanced rules (demo 1 --enhanced)"
+    echo ""
+    echo "📚 Tutorial Concepts Demonstrated:"
+    echo "   • Hybrid AI architecture (computational + predictive logic)"
+    echo "   • Microprompting methodology for reliable AI decisions"
+    echo "   • Forward-chaining rule cascades"
+    echo "   • Deterministic fallback guardrails for production systems"
+}
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Input Validation and Help Processing
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Check for help flag first (can appear anywhere in arguments)
+for arg in "$@"; do
+    if [[ "$arg" == "--help" ]]; then
+        show_help
+        exit 0
+    fi
+done
+
+# Check if we have at least one argument (the scenario number)
+if [ $# -lt 1 ]; then
+    show_help
+    exit 1
+fi
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Scenario Mapping Configuration
+# ═══════════════════════════════════════════════════════════════════════════════
+# Map user-friendly scenario numbers to actual event files
+
+declare -A SCENARIOS
+SCENARIOS[1]="events/event-1.txt"  # HIGH risk - Tariff crisis
+SCENARIOS[2]="events/event-2.txt"  # LOW risk - Normal operations
+SCENARIOS[3]="events/event-3.txt"  # MEDIUM risk - Shipping delays  
+SCENARIOS[4]="events/event-4.txt"  # Enhanced rules demo
+
+# Validate scenario number
+SCENARIO=$1
+if [[ ! ${SCENARIOS[$SCENARIO]+_} ]]; then
+    echo "❌ Error: Invalid scenario '$SCENARIO'"
+    echo "   Available scenarios: 1, 2, 3, 4"
+    echo "   Run 'demo --help' for complete usage information"
+    exit 1
+fi
+
+EVENT_FILE=${SCENARIOS[$SCENARIO]}
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Flag Processing and Command Construction
+# ═══════════════════════════════════════════════════════════════════════════════
+# Process command line flags and build the appropriate Python command
+
+# Start with the base Python command
+CMD="python3 demo.py $SCENARIO"
+
+# Process flags to determine AI provider and enhancement options
+GEMINI_FLAG=false
+OPENAI_FLAG=false
+ENHANCED_FLAG=false
+
+# Parse all arguments after the scenario number
+for arg in "${@:2}"; do
+    case $arg in
+        --gemini)
+            GEMINI_FLAG=true
+            ;;
+        --openai)
+            OPENAI_FLAG=true
+            ;;
+        --enhanced)
+            ENHANCED_FLAG=true
+            ;;
+        --help)
+            # Already handled above, skip
+            ;;
+        *)
+            echo "❌ Error: Unknown option '$arg'"
+            echo "   Valid options: --gemini, --openai, --enhanced, --help"
+            echo "   Run 'demo --help' for complete usage information"
+            exit 1
+            ;;
+    esac
+done
+
+# Validate flag combinations
+if [ "$GEMINI_FLAG" = true ] && [ "$OPENAI_FLAG" = true ]; then
+    echo "❌ Error: Cannot use both --gemini and --openai"
+    echo "   Choose one AI provider or use default (mock simulation)"
+    echo "   Run 'demo --help' for complete usage information"
+    exit 1
+fi
+
+if [ "$ENHANCED_FLAG" = true ] && [ "$GEMINI_FLAG" = false ] && [ "$OPENAI_FLAG" = false ]; then
+    echo "❌ Error: --enhanced requires either --gemini or --openai"
+    echo "   Enhanced rules don't apply to mock simulation"
+    echo "   Run 'demo --help' for complete usage information"
+    exit 1
+fi
+
+# Add appropriate flags to the Python command
+if [ "$GEMINI_FLAG" = true ]; then
+    CMD="$CMD --gemini"
+elif [ "$OPENAI_FLAG" = true ]; then
+    CMD="$CMD --openai"
+fi
+
+if [ "$ENHANCED_FLAG" = true ]; then
+    CMD="$CMD --enhanced"
+fi
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Execution with User Feedback
+# ═══════════════════════════════════════════════════════════════════════════════
+# Provide clear feedback about what's happening and execute the command
+
+# Determine processing mode for user feedback
+if [ "$GEMINI_FLAG" = true ]; then
+    PROCESSING_MODE="Gemini integration"
+elif [ "$OPENAI_FLAG" = true ]; then
+    PROCESSING_MODE="OpenAI integration"
+else
+    PROCESSING_MODE="mock simulation"
+    echo "💡 Using mock AI simulation (no API key required)"
+    echo "   Ready for real AI? Try: demo $SCENARIO --gemini or demo $SCENARIO --openai"
+    echo ""
+fi
+
+if [ "$ENHANCED_FLAG" = true ]; then
+    PROCESSING_MODE="$PROCESSING_MODE (enhanced)"
+fi
+
+# Show what we're about to execute
+echo "🎯 Running scenario $SCENARIO with $PROCESSING_MODE:"
+echo "📁 Event: $EVENT_FILE"
+echo "⚡ Command: $CMD"
+echo ""
+
+# Execute the Python command and preserve its exit code
+# This ensures any errors are properly propagated to the user
+exec $CMD

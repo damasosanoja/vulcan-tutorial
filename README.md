@@ -1,11 +1,28 @@
 # Vulcan Supply Chain Tutorial
 
-**Learn Vulcan's hybrid AI approach through hands-on supply chain risk automation**
+This repository contains the complete hands-on tutorial files for learning Vulcan's hybrid AI approach through supply chain risk automation. **[Read the full tutorial here](#)** to understand the concepts and architectural decisions behind this implementation.
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/damasosanoja/vulcan-tutorial)
+## 🚀 Quick Start
 
+**Option 1: GitHub Codespaces (Recommended)**
 
-Learn how to build reliable AI-enhanced automation systems using **Vulcan**, a forward-chaining inference engine that combines computational logic with AI intelligence. Through a realistic supply chain risk scenario, you'll learn why traditional LLM+RAG approaches fail in high-stakes automation and how Vulcan's hybrid architecture solves these problems.
+[![Use this template](https://img.shields.io/badge/Use%20this%20template-2ea44f?style=for-the-badge)](https://github.com/damasosanoja/vulcan-tutorial/generate)
+
+1. Click the **"USE THIS TEMPLATE"** button above to create your own copy
+2. Open **your new repository** in Codespaces
+3. Enter your OpenAI or Gemini API keys (optional but recommended for the full Vulcan experience)
+4. Run: `./demo 1` (works immediately, no API keys required!)
+
+**Option 2: Local Development**
+
+Clone this repository to the desired location and run:
+
+```
+cd vulcan-tutorial
+pip install -r requirements.txt
+chmod +x demo
+./demo 1  # Mock simulation (no API key required)
+```
 
 ## 🎯 What You'll Learn
 
@@ -13,99 +30,97 @@ Learn how to build reliable AI-enhanced automation systems using **Vulcan**, a f
 - **Hybrid architecture** that combines AI flexibility with computational reliability  
 - **Microprompting techniques** that reduce AI hallucination risk
 - **Forward-chaining rules** that create intelligent automation cascades
-- **Production patterns** for AI-enhanced decision systems
-
-## 🚀 Quick Start
-
-**Option 1: GitHub Codespaces (Recommended)**
-1. Click the "Open in GitHub Codespaces" badge above
-2. Wait for the environment to load (2-3 minutes)
-3. Run the mock AI tutorial: `python supply_chain.py --mock events/event-1.txt`
-
-**Option 2: Local Development**
-```bash
-git clone your-repo-url
-cd vulcan-supply-chain-tutorial
-pip install -r requirements.txt
-python supply_chain.py --mock events/event-1.txt
-```
+- **Advanced patterns** for AI-enhanced decision systems
 
 ## 📚 Tutorial Progression
 
-This tutorial follows a carefully designed 3-stage progression:
+This tutorial follows a carefully designed 2-stage progression:
 
 ### Stage 1: Mock AI Simulation
-```bash
-python supply_chain.py --mock events/event-1.txt
-```
-- ✅ **No API key required** - perfect for learning concepts
-- Demonstrates microprompting methodology with deterministic responses
-- Shows console output that matches real AI implementation exactly
 
-### Stage 2: Real AI Integration  
-```bash
-python supply_chain.py events/event-1.txt
 ```
-- ⚙️ **Requires GEMINI_API_KEY** (enter as Codespace secret when prompted)
-- Real Gemini LLM classification with production error handling
+./demo 1  # Default - works immediately, no API key required
+```
+
+- ✅ **Perfect for learning** - demonstrates concepts without API complexity
+- Shows microprompting methodology with deterministic responses
+- Identical output format to real AI for easy comparison
+
+### Stage 2: Real AI Integration 
+
+```
+./demo 1 --gemini     # Requires GEMINI_API_KEY
+./demo 1 --openai     # Requires OPENAI_API_KEY  
+```
+
+- ⚙️ **Real LLM integration** - experience authentic AI behavior with error handling
+- Supports both OpenAI and Gemini providers
 - Identical rule structure to mock - seamless transition
 
 ### Stage 3: Enhanced Safeguards
-```bash
-python supply_chain.py --enhanced events/event-4.txt  
+
 ```
-- 🛡️ **Production-ready** with deterministic fallback guardrails
+./demo 1 --gemini --enhanced   # Advanced patterns with fallbacks
+./demo 4 --openai --enhanced   # Critical keyword override demo
+```
+
+- 🛡️ **Advanced safeguards** - deterministic fallback guardrails
 - Shows how to override AI decisions for critical business scenarios
-- Demonstrates Vulcan's hybrid architecture advantages
 
-## 🗂️ Project Structure
+## 🎮 Try Different Scenarios
 
 ```
-├── 📁 events/                  # Test scenarios
-│   ├── event-1.txt            #   └─ Tariff announcement (HIGH risk)
-│   ├── event-2.txt            #   └─ Normal operations (LOW risk)  
-│   ├── event-3.txt            #   └─ Shipping delays (MEDIUM risk)
-│   └── event-4.txt            #   └─ Enhanced rules demo
-├── 📁 supply_chain/           # Core tutorial package
-│   ├── schema.py              #   └─ Domain model (Facts)
-│   ├── rules.py               #   └─ Stage 0: Pure deterministic rules
-│   ├── rules_mock.py          #   └─ Stage 1: Mock AI simulation  
-│   ├── rules_gemini.py        #   └─ Stage 2: Real AI integration
-│   └── rules_gemini_enhanced.py  └─ Stage 3: Enhanced safeguards
-├── 📁 prompts/                # AI prompt templates
-├── main.py                    # Stage 0: Quick deterministic demo
-├── main-01.py                 # Stage 1: Mock AI runner
-├── main-02.py                 # Stage 2: Real AI runner  
-└── supply_chain.py            # 🎯 Unified launcher (recommended)
+./demo 1      # Tariff crisis triggers supplier switching
+./demo 2      # Normal operations, no alerts  
+./demo 3      # Shipping delays, monitoring alert only
+./demo 4      # Enhanced rules override demonstration
+
+./demo --help # Complete command reference
 ```
 
 ## 🔧 API Key Configuration
 
 ### For Codespaces (Automatic)
-When you first open this repository in Codespaces, you'll be prompted to enter your `GEMINI_API_KEY`. This is stored securely and persists across sessions.
+When you create a Codespace, you'll be prompted to enter your API keys. These are stored securely and persist across sessions.
 
 ### For Local Development  
-Create a `.env` file:
-```bash
-GEMINI_API_KEY=your_actual_key_here
+
+Create a `.env` file in the `root` folder and paste your API key:
+
+```
+OPENAI_API_KEY=your_openai_key_here    # Preferred provider
+GEMINI_API_KEY=your_gemini_key_here    # Alternative provider
 ```
 
-**💡 Pro Tip:** Start with `--mock` examples - they work immediately without any API keys!
+**💡 Pro Tip:** Start with `./demo 1` - it works immediately without any API keys!
 
-## 🎮 Try Different Scenarios
+## 🗂️ Project Structure
 
-```bash
-# Tariff crisis triggers supplier switching
-python supply_chain.py --mock events/event-1.txt
-
-# Normal operations, no alerts  
-python supply_chain.py --mock events/event-2.txt
-
-# Shipping delays, monitoring alert only
-python supply_chain.py --mock events/event-3.txt
-
-# Enhanced rules override AI classification
-python supply_chain.py --enhanced events/event-4.txt
+```
+├── 📄 LICENSE                    # MIT License
+├── 📄 README.md                  # This file
+├── 🚀 demo                       # Bash launcher (./demo 1)
+├── 🐍 demo.py                    # Python launcher (python demo.py 1)
+├── 📁 events/                    # Test scenarios
+│   ├── event-1.txt              #   └─ Tariff crisis (HIGH risk)
+│   ├── event-2.txt              #   └─ Normal operations (LOW risk)  
+│   ├── event-3.txt              #   └─ Shipping delays (MEDIUM risk)
+│   └── event-4.txt              #   └─ Enhanced rules demo
+├── 📁 prompts/                   # AI prompt templates
+│   └── ai-reasoning-prompt.txt  #   └─ Microprompting template
+├── 📄 requirements.txt           # Python dependencies
+├── 📁 runners/                   # Stage implementations
+│   ├── __init__.py              #   └─ Package marker
+│   ├── ai_integration.py        #   └─ Real AI integration (Stage 2)
+│   └── mock_simulation.py       #   └─ Mock AI simulation (Stage 1)
+└── 📁 supply_chain/             # Core tutorial package
+    ├── __init__.py              #   └─ Package marker
+    ├── initial_state.py         #   └─ Baseline facts
+    ├── prompt_loader.py         #   └─ Template management
+    ├── rules_ai_baseline.py     #   └─ Real AI rules (baseline)
+    ├── rules_ai_enhanced.py     #   └─ Real AI + fallback guardrails
+    ├── rules_mock.py            #   └─ Mock AI simulation rules
+    └── schema.py                #   └─ Domain model (Facts)
 ```
 
 ## 🔍 What Makes This Different
@@ -125,9 +140,8 @@ python supply_chain.py --enhanced events/event-4.txt
 
 ## 📖 Learning Resources
 
-- **Vulcan Documentation**: [Link to Vulcan docs]
-- **Microprompting Guide**: See `prompts/ai-reasoning-prompt.txt`
-- **Architecture Deep Dive**: Examine the progression from `rules.py` → `rules_mock.py` → `rules_gemini.py`
+- **Tutorial Article**: [Read the full tutorial](#) (comprehensive walkthrough)
+- **Vulcan Documentation**: [Full documentation here](https://latchfield.com/vulcan/docs/)
 
 ## 🤝 Contributing
 
@@ -135,8 +149,4 @@ This tutorial is designed to be self-contained and educational. If you find area
 
 ## 📄 License
 
-MIT License
-
----
-
-**Ready to learn hybrid AI automation?** Click the Codespaces badge above and start with `python supply_chain.py --mock events/event-1.txt` 🚀
+MIT License - see [LICENSE](LICENSE) file for details.
