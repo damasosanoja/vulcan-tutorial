@@ -48,8 +48,5 @@
   
   "onCreateCommand": "echo 'Welcome to the Vulcan Supply Chain Tutorial! 🚀'",
   
-  "postStartCommand": [
-    "echo 'Tutorial ready! Try: python supply_chain.py --mock events/event-1.txt'",
-    "echo 'For real AI examples, make sure your GEMINI_API_KEY secret is configured.'"
-  ]
+  "postStartCommand": "echo 'Tutorial ready! Try: python supply_chain.py --mock events/event-1.txt' && echo 'For real AI examples, make sure your GEMINI_API_KEY secret is configured.'"
 }
